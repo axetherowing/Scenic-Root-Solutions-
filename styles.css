@@ -586,8 +586,7 @@ h3 { font-size: 1.4rem; font-weight: 700; }
   position: relative;
   max-width: 100%;
   margin: 3rem auto 2rem;
-  display: flex;
-  align-items: center;
+  /* full width bleed optionally, but container bounds it */
 }
 
 .carousel-track-wrapper {
@@ -596,43 +595,72 @@ h3 { font-size: 1.4rem; font-weight: 700; }
   width: 100%;
   position: relative;
   box-shadow: var(--shadow-md);
-  padding: 4px; /* Room for hover shadow/zoom */
+  padding: 10px 0; /* Room for soft shadows on items */
+  background: var(--cream);
+}
+
+.carousel-track-wrapper::before,
+.carousel-track-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carousel-track-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream) 0%, transparent 100%);
+}
+.carousel-track-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--cream) 0%, transparent 100%);
 }
 
 .carousel-track {
   display: flex;
-  gap: 20px;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-  cursor: grab;
+  gap: 24px;
+  width: max-content;
+  /* Animation: 30s linear infinite */
+  animation: scroll-left 30s linear infinite;
 }
-.carousel-track.grabbing {
-  cursor: grabbing;
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  /* Translate exactly half the width. Since there are gap properties, we translate by 50% + half gap.
+     Actually, calculating exact width of half track is simpler if track is width: max-content
+     and we translate by -50%. Because gap is included in track width uniformly. */
+  100% { transform: translateX(calc(-50% - 12px)); }
 }
 
 .carousel-slide {
-  flex: 0 0 calc((100% - 40px) / 3);
-  min-width: calc((100% - 40px) / 3);
+  flex: 0 0 350px;
+  width: 350px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
   aspect-ratio: 4 / 3;
-  /* Soft shadow wrapper */
   box-shadow: var(--shadow-sm);
-  background: var(--cream);
+  background: var(--white);
+  /* Slight padding on the side to align */
+  margin-left: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .carousel-slide {
-    flex: 0 0 calc((100% - 20px) / 2);
-    min-width: calc((100% - 20px) / 2);
+    flex: 0 0 280px;
+    width: 280px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .carousel-slide {
-    flex: 0 0 calc(100% - 10px);
-    min-width: calc(100% - 10px);
-    margin: 0 5px; /* slight center gap fix for mobile */
+    flex: 0 0 240px;
+    width: 240px;
   }
 }
 
@@ -641,76 +669,10 @@ h3 { font-size: 1.4rem; font-weight: 700; }
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
-  pointer-events: none; /* prevent drag ghosting */
 }
 
 .carousel-slide:hover img {
   transform: scale(1.05); /* Slight zoom on hover */
-}
-
-/* Controls */
-.carousel-btn {
-  background: var(--white);
-  border: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  box-shadow: var(--shadow-md);
-  color: var(--green-dark);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  transition: background var(--transition), color var(--transition), transform 0.2s;
-}
-
-.carousel-btn:hover {
-  background: var(--green-mid);
-  color: var(--white);
-  transform: translateY(-50%) scale(1.05);
-}
-
-.carousel-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.prev-btn { left: -22px; }
-.next-btn { right: -22px; }
-
-@media (max-width: 768px) {
-  .prev-btn { left: 8px; }
-  .next-btn { right: 8px; }
-}
-
-/* Dots */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 1.5rem;
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.15);
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition);
-  padding: 0;
-}
-
-.carousel-dot:hover, 
-.carousel-dot.active {
-  background: var(--green-mid);
-  transform: scale(1.25);
 }
 
 /* ================================================

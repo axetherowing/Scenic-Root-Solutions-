@@ -212,12 +212,9 @@
       <p class="section-sub">Take a look at some of our recent tree removals, trimming, and cleanups.</p>
       
       <div class="carousel-container">
-        <button class="carousel-btn prev-btn" aria-label="Previous image">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        
         <div class="carousel-track-wrapper">
           <div class="carousel-track" id="gallery-track">
+            <!-- Original Set -->
             <div class="carousel-slide">
               <img src="images/service_removal.png" alt="Massive tree removal project" loading="lazy">
             </div>
@@ -230,21 +227,23 @@
             <div class="carousel-slide">
               <img src="images/hero.png" alt="Arborist safely working in tree" loading="lazy">
             </div>
-            <div class="carousel-slide">
-              <img src="images/service_removal.png" alt="Hazardous tree takedown before and after" loading="lazy">
+            
+            <!-- Duplicated Set for Seamless Loop -->
+            <div class="carousel-slide" aria-hidden="true">
+              <img src="images/service_removal.png" alt="Massive tree removal project" loading="lazy">
             </div>
-            <div class="carousel-slide">
-              <img src="images/service_trimming.png" alt="Stump removal and yard clean-up" loading="lazy">
+            <div class="carousel-slide" aria-hidden="true">
+              <img src="images/service_trimming.png" alt="Precision tree trimming and pruning" loading="lazy">
+            </div>
+            <div class="carousel-slide" aria-hidden="true">
+              <img src="images/service_emergency.png" alt="Emergency tree clearing from property" loading="lazy">
+            </div>
+            <div class="carousel-slide" aria-hidden="true">
+              <img src="images/hero.png" alt="Arborist safely working in tree" loading="lazy">
             </div>
           </div>
         </div>
-        
-        <button class="carousel-btn next-btn" aria-label="Next image">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
       </div>
-      
-      <div class="carousel-dots" id="gallery-dots"></div>
     </div>
   </section>
 
