@@ -639,12 +639,12 @@ h3 { font-size: 1.4rem; font-weight: 700; }
 }
 
 .carousel-slide {
-  flex: 0 0 350px;
-  width: 350px;
+  flex: 0 0 280px;
+  width: 280px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 9 / 16;
   box-shadow: var(--shadow-sm);
   background: var(--white);
   /* Slight padding on the side to align */
@@ -653,14 +653,14 @@ h3 { font-size: 1.4rem; font-weight: 700; }
 
 @media (max-width: 768px) {
   .carousel-slide {
-    flex: 0 0 280px;
-    width: 280px;
+    flex: 0 0 240px;
+    width: 240px;
   }
 }
 @media (max-width: 480px) {
   .carousel-slide {
-    flex: 0 0 240px;
-    width: 240px;
+    flex: 0 0 200px;
+    width: 200px;
   }
 }
 
